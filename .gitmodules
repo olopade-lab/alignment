@@ -1,3 +1,6 @@
 [submodule "seq-format-conversion"]
 	path = seq-format-conversion
 	url = https://github.com/gatk-workflows/seq-format-conversion.git
+[submodule "gatk4-data-processing"]
+	path = gatk4-data-processing
+	url = https://github.com/gatk-workflows/gatk4-data-processing.git
