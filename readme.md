@@ -28,7 +28,7 @@ fastq and bam inputs are supported.
 
 
 # Execution
-To run the small example: 
+To run the small example (this should work out-of-the-box, without modifying the parsl, cromwell, or alignment configuration): 
 ```
 align configs/small_test.HumanG1Kv37.yaml
 ```
