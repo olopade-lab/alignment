@@ -1,14 +1,24 @@
-max_concurrent_samples: 25
-poll_interval: 120
+max_concurrent_samples: 25  # Max number of samples to process concurrently
+poll_interval: 120  # How often to check in seconds if we have completed any samples and can submit a new one
 bam_inputs: wabcs/bam.csv
 fastq_inputs: wabcs/fastq.csv
 project_dir: wabcs
 cromwell_config: configs/docker_slurm.conf
 parsl_config: configs/igsb.py
+
 # Uncomment below and point to existing library to skip library creation
 # library: /foo/bar
-# Configuration is based on the GATK recommendation for b37
+
+# Configuration is based on the GATK recommendation for b37, found here:
 # https://github.com/gatk-workflows/gatk4-data-processing/blob/master/processing-for-variant-discovery-gatk4.b37.wgs.inputs.json
+# We are using the human_g1k_v37 reference, which is identical to b37
+# except that it is missing some decoy sequences. See here for more
+# details:
+# https://gatk.broadinstitute.org/hc/en-us/articles/360035890711-GRCh37-hg19-b37-humanG1Kv37-Human-Reference-Discrepancies
+# See here for additional info on GATK4's resource bundles:
+# https://gatk.broadinstitute.org/hc/en-us/articles/360035890811
+# https://gatk.broadinstitute.org/hc/en-us/articles/360035890811-Resource-bundle
+
 PreProcessingForVariantDiscovery_GATK4.ref_name: human_g1k_v37
 PreProcessingForVariantDiscovery_GATK4.ref_fasta: /cephfs/common/reference/human/GRCh37_GATK_Data_Bundle_v2.8/human_g1k_v37.fasta
 PreProcessingForVariantDiscovery_GATK4.ref_fasta_index: /cephfs/common/reference/human/GRCh37_GATK_Data_Bundle_v2.8/human_g1k_v37.fasta.fai
@@ -18,13 +28,13 @@ PreProcessingForVariantDiscovery_GATK4.SamToFastqAndBwaMem.ref_amb: /cephfs/comm
 PreProcessingForVariantDiscovery_GATK4.SamToFastqAndBwaMem.ref_bwt: /cephfs/common/reference/human/GRCh37_GATK_Data_Bundle_v2.8/human_g1k_v37.fasta.bwt
 PreProcessingForVariantDiscovery_GATK4.SamToFastqAndBwaMem.ref_ann: /cephfs/common/reference/human/GRCh37_GATK_Data_Bundle_v2.8/human_g1k_v37.fasta.ann
 PreProcessingForVariantDiscovery_GATK4.SamToFastqAndBwaMem.ref_pac: /cephfs/common/reference/human/GRCh37_GATK_Data_Bundle_v2.8/human_g1k_v37.fasta.pac
-# Originally downloaded from:
-# ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/b37/dbsnp_138.b37.vcf.gz
-PreProcessingForVariantDiscovery_GATK4.dbSNP_vcf: /cephfs/PROJECTS/annawoodard/alignment/library/dbsnp_138.b37.vcf
-PreProcessingForVariantDiscovery_GATK4.dbSNP_vcf_index: /cephfs/PROJECTS/annawoodard/alignment/library/dbsnp_138.b37.vcf.idx
-# For more info on the GATK recommendations:
-# https://gatk.broadinstitute.org/hc/en-us/articles/360035890811
+PreProcessingForVariantDiscovery_GATK4.dbSNP_vcf: gs://gatk-legacy-bundles/b37/dbsnp_138.b37.vcf
+PreProcessingForVariantDiscovery_GATK4.dbSNP_vcf_index: gs://gatk-legacy-bundles/b37/dbsnp_138.b37.vcf.idx
 PreProcessingForVariantDiscovery_GATK4.known_indels_sites_VCFs: [
-  https://data.broadinstitute.org/snowman/hg19/variant_calling/vqsr_resources/Exome/v2/Mills_and_1000G_gold_standard.indels.b37.vcf.gz,
+  gs://gatk-legacy-bundles/b37/Mills_and_1000G_gold_standard.indels.b37.vcf,
   gs://gatk-legacy-bundles/b37/1000G_phase1.indels.b37.vcf
+]
+PreProcessingForVariantDiscovery_GATK4.known_indels_sites_indices: [
+  gs://gatk-legacy-bundles/b37/Mills_and_1000G_gold_standard.indels.b37.vcf.idx,
+  gs://gatk-legacy-bundles/b37/1000G_phase1.indels.b37.vcf.idx
 ]
