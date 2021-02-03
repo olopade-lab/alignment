@@ -1,4 +1,4 @@
-max_concurrent_samples: 25  # Max number of samples to process concurrently
+max_concurrent_samples: 50  # Max number of samples to process concurrently
 poll_interval: 120  # How often to check in seconds if we have completed any samples and can submit a new one
 bam_inputs: wabcs/bam.csv
 fastq_inputs: wabcs/fastq.csv

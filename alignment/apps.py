@@ -463,6 +463,8 @@ def align(unmapped_bams, config, localized_config, sample, tag, clean_inputs=Fal
         ),
     )
     if os.path.isfile(checkpoint):
+        with open(stderr, "a") as f:
+            print("found completed alignment: {}".format(checkpoint), file=f)
         return
 
     command = [
@@ -509,3 +511,4 @@ def align(unmapped_bams, config, localized_config, sample, tag, clean_inputs=Fal
                 print("removing links: {}".format(", ".join(links)), file=f)
                 for link in links:
                     os.unlink(link)
+            print("finished removing links", file=f)

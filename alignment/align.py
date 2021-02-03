@@ -42,12 +42,16 @@ def run():
 
     aligned_bams = []
     for sample, tag, path in zip(bams["sample"], bams["tag"], bams["path"]):
-        while True:
-            concurrent_samples = len([b for b in aligned_bams if not b.done()])
-            if concurrent_samples < config["max_concurrent_samples"]:
-                break
-            else:
-                time.sleep(config["poll_interval"])
+        if len(aligned_bams) > config["max_concurrent_samples"]:
+            [b.result() for b in aligned_bams]
+            aligned_bams = []
+        # while True:
+        #     print(aligned_bams)
+        #     concurrent_samples = len([b for b in aligned_bams if not b.done()])
+        #     if concurrent_samples < config["max_concurrent_samples"]:
+        #         break
+        #     else:
+        #         time.sleep(config["poll_interval"])
         print("starting bam to ubam for sample {}".format(sample))
         path = path.strip()
         if not os.path.isabs(path):
@@ -64,12 +68,16 @@ def run():
         )
 
     for _, row in fastqs.iterrows():
-        while True:
-            concurrent_samples = len([b for b in aligned_bams if not b.done()])
-            if concurrent_samples < config["max_concurrent_samples"]:
-                break
-            else:
-                time.sleep(config["poll_interval"])
+        if len(aligned_bams) > config["max_concurrent_samples"]:
+            [b.result() for b in aligned_bams]
+            aligned_bams = []
+        # while True:
+        #     print(aligned_bams)
+        #     concurrent_samples = len([b for b in aligned_bams if not b.done()])
+        #     if concurrent_samples < config["max_concurrent_samples"]:
+        #         break
+        #     else:
+        #         time.sleep(config["poll_interval"])
         path = row["path"].strip()
         if not os.path.isabs(path):
             path = os.path.join(config["project_dir"], path)
