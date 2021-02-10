@@ -1,0 +1,3 @@
+fastq_list	sequencing_center	platform_name	run_date	sample	tag
+small_test/fastq_lists/N010877_normal.tsv	University of Chicago	Illumina	''	N010877	normal
+small_test/fastq_lists/N010877_tumor.tsv	University of Chicago	Illumina	''	N010877	normal

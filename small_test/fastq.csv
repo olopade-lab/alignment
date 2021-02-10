@@ -1,5 +1,0 @@
-# left and right wildcard should match to the left and right input
-# fastqs respectively
-sample, tag, sequencing_center, path, run_date, left_wildcard, right_wildcard
-sample_1, tumor, foo-sequencing-center, data, '', reads_1.fastq, reads_2.fastq
-sample_2, normal, foo-sequencing-center, data, '', reads_1.fastq, reads_2.fastq
